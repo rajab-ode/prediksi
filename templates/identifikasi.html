@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Identifikasi Daun Cabai</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom right, #d1fae5, #a7f3d0);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #047857;
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .form-container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .form-container h2 {
+      margin-bottom: 25px;
+      color: #047857;
+    }
+
+    /* Hide the actual file input */
+    input[type="file"] {
+      display: none; /* Hide the default file input */
+    }
+
+    .button-group {
+      display: flex;
+      flex-direction: column; /* Stack buttons vertically on small screens */
+      gap: 15px; /* Space between buttons */
+      margin-bottom: 25px;
+    }
+
+    .action-button {
+      background-color: #047857;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      display: flex; /* Use flex to center icon and text */
+      align-items: center;
+      justify-content: center;
+      gap: 10px; /* Space between icon and text */
+    }
+
+    .action-button:hover {
+      background-color: #16a34a;
+      transform: translateY(-2px); /* Slight lift effect */
+    }
+
+    .action-button:active {
+      transform: translateY(0); /* Press effect */
+    }
+
+    .submit-button {
+      background-color: #0d9488; /* A slightly different green for submit */
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      width: 100%; /* Make submit button full width */
+      margin-top: 20px; /* Space above submit button */
+    }
+
+    .submit-button:hover {
+      background-color: #065f46;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 25px;
+      text-decoration: none;
+      color: #0d9488;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: #065f46;
+    }
+
+    .preview {
+      margin-top: 20px;
+      min-height: 150px; /* Ensure space for preview even if no image */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 2px dashed #e2e8f0; /* Dashed border for preview area */
+      border-radius: 10px;
+      padding: 10px;
+    }
+
+    .preview img {
+      max-width: 100%;
+      max-height: 250px; /* Limit preview image height */
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .preview p {
+      color: #94a3b8; /* Slate 400 */
+    }
+
+    .error-message {
+      color: #dc2626; /* Red 600 */
+      font-size: 0.9rem;
+      margin-top: 10px;
+      display: none; /* Hidden by default */
+    }
+
+    footer {
+      background-color: #ecfdf5;
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+      color: #444;
+    }
+
+    /* Responsive adjustments */
+    @media (min-width: 640px) {
+      .button-group {
+        flex-direction: row; /* Buttons side-by-side on larger screens */
+        justify-content: center;
+      }
+      .action-button {
+        flex: 1; /* Distribute space equally */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🌶️ Identifikasi Penyakit Daun Cabai</h1>
+  </header>
+
+  <main>
+    <div class="form-container">
+      <h2>Unggah Gambar Daun Cabai</h2>
+      <form method="POST" enctype="multipart/form-data">
+        <!-- Hidden file inputs -->
+        <!-- Input for camera capture -->
+        <input type="file" name="gambar" id="cameraInput" accept="image/*" capture="environment" onchange="previewImage(event)">
+        <!-- Input for selecting from gallery/files -->
+        <input type="file" name="gambar" id="galleryInput" accept="image/*" onchange="previewImage(event)">
+
+        <div class="button-group">
+          <!-- Button to trigger camera input -->
+          <button type="button" class="action-button" onclick="document.getElementById('cameraInput').click()">
+            📸 Ambil Foto
+          </button>
+          <!-- Button to trigger gallery input -->
+          <button type="button" class="action-button" onclick="document.getElementById('galleryInput').click()">
+            📁 Pilih dari Galeri
+          </button>
+        </div>
+
+        <div class="preview" id="preview-container">
+          <p>Pratinjau gambar akan muncul di sini</p>
+        </div>
+
+        <!-- Message for user if no file is selected -->
+        <p id="errorMessage" class="error-message">Mohon pilih atau ambil gambar terlebih dahulu.</p>
+
+        <!-- Submit button for the form -->
+        <button type="submit" class="submit-button">🔍 Identifikasi</button>
+      </form>
+      <a href="/">← Kembali ke Beranda</a>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 Sistem Identifikasi Penyakit Daun Cabai
+  </footer>
+
+  <script>
+    // Function to display image preview
+    function previewImage(event) {
+      const file = event.target.files[0];
+      const previewContainer = document.getElementById('preview-container');
+      const errorMessage = document.getElementById('errorMessage');
+
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function() {
+          const img = document.createElement('img');
+          img.src = reader.result;
+          previewContainer.innerHTML = ''; // Clear previous content
+          previewContainer.appendChild(img);
+          errorMessage.style.display = 'none'; // Hide error message if a file is selected
+        };
+        reader.readAsDataURL(file);
+      } else {
+        // If no file selected (e.g., user cancels camera/gallery), clear preview
+        previewContainer.innerHTML = '<p>Pratinjau gambar akan muncul di sini</p>';
+        // Do not show error message here, as user might still choose another option
+      }
+    }
+
+    // Event listener to ensure only one file input is used for submission
+    document.querySelector('form').addEventListener('submit', function(e) {
+      const cameraInput = document.getElementById('cameraInput');
+      const galleryInput = document.getElementById('galleryInput');
+      const errorMessage = document.getElementById('errorMessage');
+
+      let fileSelected = false;
+
+      // Check if camera input has a file
+      if (cameraInput.files.length > 0) {
+        fileSelected = true;
+        galleryInput.value = ''; // Clear gallery input's file
+      }
+      // Check if gallery input has a file
+      else if (galleryInput.files.length > 0) {
+        fileSelected = true;
+        cameraInput.value = ''; // Clear camera input's file
+      }
+
+      // If no file is selected, prevent submission and show the error message
+      if (!fileSelected) {
+        errorMessage.style.display = 'block'; // Show error message
+        e.preventDefault(); // Stop form submission
+      } else {
+        errorMessage.style.display = 'none'; // Hide error message if a file is selected
+      }
+    });
+  </script>
+
+</body>
+</html>

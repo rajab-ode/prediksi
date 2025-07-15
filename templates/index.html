@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Beranda - Identifikasi Penyakit Daun Cabai</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom right, #d1fae5, #a7f3d0);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: #333;
+    }
+
+    header {
+      background-color: #047857;
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .logo {
+      font-size: 60px;
+      margin-bottom: 10px;
+    }
+
+    header h1 {
+      font-size: 26px;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    nav a {
+      display: inline-block;
+      padding: 15px 30px;
+      font-size: 18px;
+      color: #047857;
+      background-color: white;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      background-color: #16a34a;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    footer {
+      background-color: #ecfdf5;
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: #444;
+    }
+
+    @media (min-width: 600px) {
+      nav ul {
+        flex-direction: row;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">🌶️🍃</div>
+    <h1>Sistem Identifikasi Penyakit Daun Cabai</h1>
+  </header>
+
+  <main>
+    <nav>
+      <ul>
+        <li><a href="/identifikasi">🌿 Identifikasi</a></li>
+        <li><a href="/cara-penggunaan">📘 Cara Penggunaan</a></li>
+        <li><a href="/tentang">💡 Tentang</a></li>
+      </ul>
+    </nav>
+  </main>
+
+  <footer>
+    &copy; 2025 Sistem Identifikasi Penyakit Daun Cabai 
+  </footer>
+
+</body>
+</html>
